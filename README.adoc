@@ -1,0 +1,5 @@
+== Enterprise Coffee
+
+This is the coffee shop example project for TODO
+
+It comprises two applications, _coffee-shop_ and _barista_, built by Java EE and MicroProfile, which can be deployed to a Kubernetes and Istio cluster.
