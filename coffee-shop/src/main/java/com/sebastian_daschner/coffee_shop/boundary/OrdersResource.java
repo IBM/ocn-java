@@ -1,14 +1,11 @@
 package com.sebastian_daschner.coffee_shop.boundary;
 
 import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
-import org.eclipse.microprofile.faulttolerance.Fallback;
-import org.eclipse.microprofile.faulttolerance.Retry;
 
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import javax.json.stream.JsonCollectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -18,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @Path("/orders")
@@ -35,18 +33,14 @@ public class OrdersResource {
     HttpServletRequest request;
 
     @GET
-    @Fallback(fallbackMethod = "emptyOrders")
-    @Retry
-    public JsonArray getOrders() {
-        return coffeeShop.getOrders().stream()
-                .map(this::buildOrder)
-                .collect(JsonCollectors.toJsonArray());
+    public List<CoffeeOrder> getOrders() {
+        return coffeeShop.getOrders();
     }
 
     private JsonObject buildOrder(CoffeeOrder order) {
         return Json.createObjectBuilder()
                 .add("type", order.getType().name())
-                .add("status", order.getStatus().name())
+                .add("status", order.getOrderStatus().name())
                 .add("_self", buildUri(order).toString())
                 .build();
     }

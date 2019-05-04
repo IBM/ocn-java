@@ -2,6 +2,7 @@ package com.sebastian_daschner.coffee_shop.entity;
 
 import com.sebastian_daschner.coffee_shop.CoffeeTypeDeserializer;
 
+import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.validation.constraints.NotNull;
@@ -12,10 +13,12 @@ public class CoffeeOrder {
     @JsonbTransient
     private final UUID id = UUID.randomUUID();
 
+    @NotNull
     @JsonbTypeAdapter(CoffeeTypeDeserializer.class)
     private CoffeeType type;
 
-    private OrderStatus status;
+    @JsonbProperty("status")
+    private OrderStatus orderStatus;
 
     public UUID getId() {
         return id;
@@ -29,12 +32,12 @@ public class CoffeeOrder {
         this.type = type;
     }
 
-    public OrderStatus getStatus() {
-        return status;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class CoffeeOrder {
         return "CoffeeOrder{" +
                 "id=" + id +
                 ", type=" + type +
-                ", status=" + status +
+                ", orderStatus=" + orderStatus +
                 '}';
     }
 }

@@ -40,7 +40,7 @@ public class CoffeeShop {
     public CoffeeOrder orderCoffee(CoffeeOrder order) {
         setDefaultType(order);
         OrderStatus status = barista.brewCoffee(order);
-        order.setStatus(status);
+        order.setOrderStatus(status);
 
         orders.store(order.getId(), order);
         return order;

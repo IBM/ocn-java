@@ -3,9 +3,6 @@ package com.sebastian_daschner.coffee_shop.control;
 import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
 import com.sebastian_daschner.coffee_shop.entity.OrderStatus;
 
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
-import javax.ejb.Singleton;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +31,7 @@ public class Orders {
 
     public List<CoffeeOrder> getUnfinishedOrders() {
         return orders.values().stream()
-                .filter(o -> o.getStatus() != OrderStatus.COLLECTED)
+                .filter(o -> o.getOrderStatus() != OrderStatus.COLLECTED)
                 .collect(Collectors.toList());
     }
 

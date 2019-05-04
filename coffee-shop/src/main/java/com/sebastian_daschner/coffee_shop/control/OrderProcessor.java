@@ -13,7 +13,7 @@ public class OrderProcessor {
 
     public void processOrder(CoffeeOrder order) {
         OrderStatus status = barista.retrieveBrewStatus(order);
-        order.setStatus(status);
+        order.setOrderStatus(status);
     }
 
 }
