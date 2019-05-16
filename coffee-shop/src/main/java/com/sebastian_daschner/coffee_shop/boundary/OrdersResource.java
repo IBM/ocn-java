@@ -17,6 +17,8 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+
 
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
@@ -51,6 +53,8 @@ public class OrdersResource {
 
     @GET
     @Path("{id}")
+    @Operation(summary="Get a coffee order", 
+               description="Returns a CoffeeOrder object for the given order id.")
     public CoffeeOrder getOrder(@PathParam("id") UUID id) {
         return coffeeShop.getOrder(id);
     }
