@@ -6,7 +6,8 @@ public enum OrderStatus {
 
     PREPARING,
     FINISHED,
-    COLLECTED;
+    COLLECTED,
+    UNKNOWN;
 
     public static OrderStatus fromString(String string) {
         return Stream.of(OrderStatus.values())
