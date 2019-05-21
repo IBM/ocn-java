@@ -39,4 +39,8 @@ public class CoffeeBrews {
         return brew;
     }
 
+    public Map<String, CoffeeBrew> retrieveBrews() {
+        return coffeeBrews;
+    }
+
 }

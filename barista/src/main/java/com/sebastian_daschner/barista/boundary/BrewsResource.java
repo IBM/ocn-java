@@ -2,23 +2,24 @@ package com.sebastian_daschner.barista.boundary;
 
 import com.sebastian_daschner.barista.entity.CoffeeBrew;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/brews/{id}")
+@Path("/brews")
 public class BrewsResource {
 
     @Inject
     CoffeeBrews coffeeBrews;
 
-    @PathParam("id")
-    String id;
-
     @GET
-    public Response retrieveCoffeeBrew() {
+    @Path("/{id}")
+    public Response retrieveCoffeeBrew(@PathParam("id") String id) {
         CoffeeBrew brew = coffeeBrews.retrieveBrew(id);
 
         if (brew == null)
@@ -27,8 +28,18 @@ public class BrewsResource {
         return Response.ok(buildResponse(brew)).build();
     }
 
+    @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response retrieveCoffeeBrews() {
+        Map<String, CoffeeBrew> brews = coffeeBrews.retrieveBrews();
+
+        return Response.ok(brews).build();
+    }
+
     @PUT
-    public Response updateCoffeeBrew(JsonObject jsonObject) {
+    @Path("/{id}")
+    public Response updateCoffeeBrew(@PathParam("id") String id, JsonObject jsonObject) {
         String coffeeType = jsonObject.getString("type", null);
 
         if (coffeeType == null)
