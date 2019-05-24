@@ -17,6 +17,8 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 
@@ -60,6 +62,10 @@ public class OrdersResource {
     }
 
     @POST
+    @Timed(
+        name="orderCoffee.timer",
+        displayName="Timings to Coffee Orders",
+        description = "Time taken to place a new coffee order.")
     public Response orderCoffee(@Valid @NotNull CoffeeOrder order) {
         final CoffeeOrder storedOrder = coffeeShop.orderCoffee(order);
         return Response.created(buildUri(storedOrder)).build();
