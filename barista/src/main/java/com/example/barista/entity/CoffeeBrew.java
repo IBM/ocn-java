@@ -1,4 +1,4 @@
-package com.sebastian_daschner.barista.entity;
+package com.example.barista.entity;
 
 public class CoffeeBrew {
 

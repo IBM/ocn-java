@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee_shop;
+package com.example.coffee_shop;
 
-import com.sebastian_daschner.coffee_shop.entity.CoffeeType;
+import com.example.coffee_shop.entity.CoffeeType;
 
 import javax.json.bind.adapter.JsonbAdapter;
 

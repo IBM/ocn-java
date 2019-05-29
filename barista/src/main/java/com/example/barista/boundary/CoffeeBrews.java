@@ -1,7 +1,7 @@
-package com.sebastian_daschner.barista.boundary;
+package com.example.barista.boundary;
 
-import com.sebastian_daschner.barista.control.RandomStatusProcessor;
-import com.sebastian_daschner.barista.entity.CoffeeBrew;
+import com.example.barista.control.RandomStatusProcessor;
+import com.example.barista.entity.CoffeeBrew;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -37,6 +37,10 @@ public class CoffeeBrews {
         brew.setStatus(statusProcessor.processStatus(brew));
 
         return brew;
+    }
+
+    public Map<String, CoffeeBrew> retrieveBrews() {
+        return coffeeBrews;
     }
 
 }

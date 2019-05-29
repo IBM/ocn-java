@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee_shop.boundary;
+package com.example.barista.boundary;
 
 import org.eclipse.microprofile.health.Health;
 import org.eclipse.microprofile.health.HealthCheck;
@@ -12,6 +12,6 @@ public class HealthResource implements HealthCheck {
 
     @Override
     public HealthCheckResponse call() {
-        return HealthCheckResponse.named("coffee-shop").withData("coffee-shop", "ok").up().build();
+        return HealthCheckResponse.named("barista").withData("barista", "ok").up().build();
     }
 }

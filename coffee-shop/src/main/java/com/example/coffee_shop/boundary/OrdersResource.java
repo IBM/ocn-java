@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee_shop.boundary;
+package com.example.coffee_shop.boundary;
 
-import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
+import com.example.coffee_shop.entity.CoffeeOrder;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -17,6 +17,11 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+
+import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.opentracing.Traced;
+
 
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
@@ -51,11 +56,17 @@ public class OrdersResource {
 
     @GET
     @Path("{id}")
+    @Operation(summary="Get a coffee order", 
+               description="Returns a CoffeeOrder object for the given order id.")
     public CoffeeOrder getOrder(@PathParam("id") UUID id) {
         return coffeeShop.getOrder(id);
     }
 
     @POST
+    @Timed(
+        name="orderCoffee.timer",
+        displayName="Timings to Coffee Orders",
+        description = "Time taken to place a new coffee order.")
     public Response orderCoffee(@Valid @NotNull CoffeeOrder order) {
         final CoffeeOrder storedOrder = coffeeShop.orderCoffee(order);
         return Response.created(buildUri(storedOrder)).build();

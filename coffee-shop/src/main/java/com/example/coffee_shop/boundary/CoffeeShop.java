@@ -1,11 +1,11 @@
-package com.sebastian_daschner.coffee_shop.boundary;
+package com.example.coffee_shop.boundary;
 
-import com.sebastian_daschner.coffee_shop.control.Barista;
-import com.sebastian_daschner.coffee_shop.control.OrderProcessor;
-import com.sebastian_daschner.coffee_shop.control.Orders;
-import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
-import com.sebastian_daschner.coffee_shop.entity.CoffeeType;
-import com.sebastian_daschner.coffee_shop.entity.OrderStatus;
+import com.example.coffee_shop.control.Barista;
+import com.example.coffee_shop.control.OrderProcessor;
+import com.example.coffee_shop.control.Orders;
+import com.example.coffee_shop.entity.CoffeeOrder;
+import com.example.coffee_shop.entity.CoffeeType;
+import com.example.coffee_shop.entity.OrderStatus;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.ejb.Stateless;

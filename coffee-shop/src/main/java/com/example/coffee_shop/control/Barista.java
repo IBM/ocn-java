@@ -1,7 +1,10 @@
-package com.sebastian_daschner.coffee_shop.control;
+package com.example.coffee_shop.control;
 
-import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
-import com.sebastian_daschner.coffee_shop.entity.OrderStatus;
+import com.example.coffee_shop.entity.CoffeeOrder;
+import com.example.coffee_shop.entity.OrderStatus;
+
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -48,13 +51,19 @@ public class Barista {
                     .request()
                     .put(Entity.json(requestBody));
         } catch (Exception e) {
-            throw new IllegalStateException("Could not retrieve brew status, reason: " + e.getMessage(), e);
+            throw new IllegalStateException("Could not place brew request, reason: " + e.getMessage(), e);
         }
     }
 
+    @Retry
+    @Fallback(fallbackMethod="unknownBrewStatus")
     public OrderStatus retrieveBrewStatus(CoffeeOrder order) {
         Response response = getBrewStatus(order.getId().toString());
         return readStatus(response);
+    }
+
+    private OrderStatus unknownBrewStatus(CoffeeOrder order) {
+        return OrderStatus.UNKNOWN;
     }
 
     private Response getBrewStatus(String id) {

@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee_shop.entity;
+package com.example.coffee_shop.entity;
 
 import java.util.stream.Stream;
 
@@ -6,7 +6,8 @@ public enum OrderStatus {
 
     PREPARING,
     FINISHED,
-    COLLECTED;
+    COLLECTED,
+    UNKNOWN;
 
     public static OrderStatus fromString(String string) {
         return Stream.of(OrderStatus.values())

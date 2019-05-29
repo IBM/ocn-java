@@ -1,4 +1,4 @@
-package com.sebastian_daschner.barista;
+package com.example.barista;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
