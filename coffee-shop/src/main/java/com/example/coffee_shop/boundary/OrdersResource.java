@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee_shop.boundary;
+package com.example.coffee_shop.boundary;
 
-import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
+import com.example.coffee_shop.entity.CoffeeOrder;
 
 import javax.inject.Inject;
 import javax.json.Json;

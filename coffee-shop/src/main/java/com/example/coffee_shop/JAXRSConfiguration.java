@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee_shop;
+package com.example.coffee_shop;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -1,6 +1,6 @@
-package com.sebastian_daschner.barista.control;
+package com.example.barista.control;
 
-import com.sebastian_daschner.barista.entity.CoffeeBrew;
+import com.example.barista.entity.CoffeeBrew;
 
 import java.util.Random;
 

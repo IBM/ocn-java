@@ -1,6 +1,6 @@
-package com.sebastian_daschner.barista.boundary;
+package com.example.barista.boundary;
 
-import com.sebastian_daschner.barista.entity.CoffeeBrew;
+import com.example.barista.entity.CoffeeBrew;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee_shop.entity;
+package com.example.coffee_shop.entity;
 
 import java.util.stream.Stream;
 

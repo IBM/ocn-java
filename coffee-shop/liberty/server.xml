@@ -3,7 +3,7 @@
 
     <featureManager>
         <feature>javaee-8.0</feature>
-        <feature>microProfile-2.2</feature>
+        <feature>microProfile-2.1</feature>
         <feature>usr:opentracingZipkin-0.31</feature>
         <feature>monitor-1.0</feature>
     </featureManager>

@@ -1,7 +1,7 @@
-package com.sebastian_daschner.coffee_shop.control;
+package com.example.coffee_shop.control;
 
-import com.sebastian_daschner.coffee_shop.entity.CoffeeOrder;
-import com.sebastian_daschner.coffee_shop.entity.OrderStatus;
+import com.example.coffee_shop.entity.CoffeeOrder;
+import com.example.coffee_shop.entity.OrderStatus;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;

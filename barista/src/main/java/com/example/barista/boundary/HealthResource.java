@@ -1,4 +1,4 @@
-package com.sebastian_daschner.barista.boundary;
+package com.example.barista.boundary;
 
 import org.eclipse.microprofile.health.Health;
 import org.eclipse.microprofile.health.HealthCheck;

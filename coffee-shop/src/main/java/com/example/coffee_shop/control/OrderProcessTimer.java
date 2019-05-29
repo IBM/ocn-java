@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee_shop.control;
+package com.example.coffee_shop.control;
 
-import com.sebastian_daschner.coffee_shop.boundary.CoffeeShop;
+import com.example.coffee_shop.boundary.CoffeeShop;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;

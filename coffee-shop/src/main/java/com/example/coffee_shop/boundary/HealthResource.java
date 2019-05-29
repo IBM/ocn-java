@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee_shop.boundary;
+package com.example.coffee_shop.boundary;
 
 import org.eclipse.microprofile.health.Health;
 import org.eclipse.microprofile.health.HealthCheck;

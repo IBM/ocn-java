@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee_shop.entity;
+package com.example.coffee_shop.entity;
 
-import com.sebastian_daschner.coffee_shop.CoffeeTypeDeserializer;
+import com.example.coffee_shop.CoffeeTypeDeserializer;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
