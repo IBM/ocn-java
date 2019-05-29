@@ -7,6 +7,8 @@
         <feature>usr:opentracingZipkin-0.31</feature>
     </featureManager>
 
+    <opentracingZipkin host="zipkin" port="9411" />
+
     <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443"/>
 
     <keyStore id="defaultKeyStore" password="Liberty"/>

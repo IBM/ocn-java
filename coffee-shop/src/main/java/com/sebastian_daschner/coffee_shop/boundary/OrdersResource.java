@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.opentracing.Traced;
 
 
 @Path("/orders")
