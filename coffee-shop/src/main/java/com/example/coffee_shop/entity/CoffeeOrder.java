@@ -13,7 +13,6 @@ public class CoffeeOrder {
     @JsonbTransient
     private final UUID id = UUID.randomUUID();
 
-    @NotNull
     @JsonbTypeAdapter(CoffeeTypeDeserializer.class)
     private CoffeeType type;
 
