@@ -62,7 +62,7 @@ public class Barista {
         return readStatus(response);
     }
 
-    private OrderStatus unknownBrewStatus(CoffeeOrder order) {
+    public OrderStatus unknownBrewStatus(CoffeeOrder order) {
         return OrderStatus.UNKNOWN;
     }
 
