@@ -9,9 +9,8 @@ RUN apk add curl
 COPY docker-server /opt/ol/docker/
 
 # Install Open Liberty
-ENV LIBERTY_VERSION=19.0.0.1-cl190220190131-0300 \
-    LIBERTY_RELEASE=2019-01-31_0451 \
-    LIBERTY_SHA=22eb00a3e9b29dfb6b6698ed603cd524b3511a1c \
+ENV LIBERTY_VERSION=19.0.0.5 \
+    LIBERTY_RELEASE=2019-05-22_2227 \
     INSTALL_DIR=/opt/ol/wlp \
     CONFIG_DIR=/opt/ol/wlp/usr/servers/defaultServer \
     DEPLOYMENT_DIR=/opt/ol/wlp/usr/servers/defaultServer/dropins \
@@ -20,12 +19,9 @@ ENV LIBERTY_VERSION=19.0.0.1-cl190220190131-0300 \
     WLP_OUTPUT_DIR=/opt/ol/wlp/output \
     WLP_SKIP_MAXPERMSIZE=true
 
-RUN curl https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/nightly/${LIBERTY_RELEASE}/openliberty-all-${LIBERTY_VERSION}.zip -L -o /tmp/wlp.zip \
- && echo "$LIBERTY_SHA  /tmp/wlp.zip" > /tmp/wlp.zip.sha1 \
- && sha1sum -c /tmp/wlp.zip.sha1 \
+RUN curl https://public.dhe.ibm.com/ibmdl/export/pub/software/openliberty/runtime/release/${LIBERTY_RELEASE}/openliberty-${LIBERTY_VERSION}.zip -L -o /tmp/wlp.zip \
  && unzip -q /tmp/wlp.zip -d /opt/ol \
- && rm /tmp/wlp.zip \
- && rm /tmp/wlp.zip.sha1
+ && rm /tmp/wlp.zip
 
 RUN mkdir /logs \
     && mkdir -p $WLP_OUTPUT_DIR/defaultServer \
@@ -40,8 +36,8 @@ RUN /opt/ol/wlp/bin/server create \
     && mkdir /config/configDropins/defaults \
     && echo "<server description=\"Default Server\"><httpEndpoint id=\"defaultHttpEndpoint\" host=\"*\" /></server>" > /config/configDropins/defaults/open-default-port.xml
 
-ADD https://github.com/WASdev/sample.opentracing.zipkintracer/releases/download/1.2/liberty-opentracing-zipkintracer-1.2-sample.zip /
-RUN unzip liberty-opentracing-zipkintracer-1.2-sample.zip -d $INSTALL_DIR/usr/
+ADD https://github.com/WASdev/sample.opentracing.zipkintracer/releases/download/1.3/liberty-opentracing-zipkintracer-1.3-sample.zip /
+RUN unzip liberty-opentracing-zipkintracer-1.3-sample.zip -d $INSTALL_DIR/usr/
 
 EXPOSE 9080 9443
 

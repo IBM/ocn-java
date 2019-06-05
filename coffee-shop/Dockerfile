@@ -1,4 +1,4 @@
-FROM sdaschner/open-liberty:javaee8-tracing-b1
+FROM sdaschner/open-liberty:javaee8-tracing-book
 
 COPY liberty/server.xml $CONFIG_DIR
 

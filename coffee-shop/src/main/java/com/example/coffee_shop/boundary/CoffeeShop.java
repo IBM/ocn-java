@@ -2,7 +2,6 @@ package com.example.coffee_shop.boundary;
 
 import com.example.coffee_shop.control.Barista;
 import com.example.coffee_shop.control.OrderProcessor;
-import com.example.coffee_shop.control.Orders;
 import com.example.coffee_shop.entity.CoffeeOrder;
 import com.example.coffee_shop.entity.CoffeeType;
 import com.example.coffee_shop.entity.OrderStatus;
@@ -10,6 +9,8 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,33 +18,34 @@ import java.util.UUID;
 public class CoffeeShop {
 
     @Inject
-    Orders orders;
-
-    @Inject
     Barista barista;
 
     @Inject
     OrderProcessor orderProcessor;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Inject
     @ConfigProperty(name = "coffeeShop.order.defaultCoffeeType", defaultValue = "ESPRESSO")
     private CoffeeType defaultCoffeeType;
 
     public List<CoffeeOrder> getOrders() {
-        return orders.retrieveAll();
+        return entityManager.createNamedQuery(CoffeeOrder.FIND_ALL, CoffeeOrder.class)
+                .getResultList();
     }
 
     public CoffeeOrder getOrder(UUID id) {
-        return orders.retrieve(id);
+        return entityManager.find(CoffeeOrder.class, id.toString());
     }
 
     public CoffeeOrder orderCoffee(CoffeeOrder order) {
+        order.setId(UUID.randomUUID().toString());
         setDefaultType(order);
         OrderStatus status = barista.brewCoffee(order);
         order.setOrderStatus(status);
 
-        orders.store(order.getId(), order);
-        return order;
+        return entityManager.merge(order);
     }
 
     private void setDefaultType(CoffeeOrder order) {
@@ -52,7 +54,9 @@ public class CoffeeShop {
     }
 
     public void processUnfinishedOrders() {
-        orders.getUnfinishedOrders().forEach(orderProcessor::processOrder);
+        entityManager.createNamedQuery(CoffeeOrder.FIND_UNFINISHED, CoffeeOrder.class)
+                .getResultList()
+                .forEach(orderProcessor::processOrder);
     }
 
 }
