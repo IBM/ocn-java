@@ -2,7 +2,6 @@ package com.example.coffee_shop.control;
 
 import com.example.coffee_shop.boundary.CoffeeShop;
 
-
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
