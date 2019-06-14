@@ -58,7 +58,7 @@ public class Barista {
     @Retry
     @Fallback(fallbackMethod="unknownBrewStatus")
     public OrderStatus retrieveBrewStatus(CoffeeOrder order) {
-        Response response = getBrewStatus(order.getId().toString());
+        Response response = getBrewStatus(order.getId().toString()); 
         return readStatus(response);
     }
 
