@@ -4,7 +4,7 @@ import com.example.coffee_shop.entity.CoffeeType;
 
 import javax.json.bind.adapter.JsonbAdapter;
 
-public class CoffeeTypeDeserializer implements JsonbAdapter<CoffeeType, String> {
+public class CoffeeTypeAdapter implements JsonbAdapter<CoffeeType, String> {
 
     @Override
     public String adaptToJson(CoffeeType type) {

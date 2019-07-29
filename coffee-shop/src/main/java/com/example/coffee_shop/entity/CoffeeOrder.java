@@ -1,6 +1,6 @@
 package com.example.coffee_shop.entity;
 
-import com.example.coffee_shop.CoffeeTypeDeserializer;
+import com.example.coffee_shop.CoffeeTypeAdapter;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
@@ -25,7 +25,7 @@ public class CoffeeOrder {
     @JsonbTransient
     private String id;
 
-    @JsonbTypeAdapter(CoffeeTypeDeserializer.class)
+    @JsonbTypeAdapter(CoffeeTypeAdapter.class)
     @Basic(optional = false)
     @Enumerated(EnumType.STRING)
     @Column(name = "coffee_type")
