@@ -1,29 +1,70 @@
 == Enterprise Coffee
 
-This is the coffee shop example project for TODO
+// TODO include title of ebook
 
-It comprises two applications, _coffee-shop_ and _barista_, built by Java EE and MicroProfile, which can be deployed to a Kubernetes and Istio cluster.
+This is the coffee shop example project.
 
-=== Building and running
+It comprises two applications, _coffee-shop_ and _barista_, built using Java EE and Eclipse MicroProfile.
 
-==== Build coffee-shop
-cd coffee-shop
-mvn clean install 
-docker build -t ocn-book:coffee-shop .
+=== Building
 
-==== Build barista
-cd barista
-mvn clean insatll
-docker build -t ocn-book:barista .
+To build the _coffee-shop_ application, run the following:
 
-==== Set up docker network
-docker network create --driver bridge ocn-book-net
+----
+cd coffee-shop/
+mvn clean package 
+docker build -t coffee-shop:1 .
+----
 
-==== Run barista
-docker run --network=ocn-book-net --name=barista ocn-book:barista
+Then, to build the _barista_ application, run the following:
 
-==== Run coffee-shop
-docker run -p 9080:9080 -p 9445:9443 --network=ocn-book-net --name=coffee-shop -e default_barista_base_url='http://barista:9081' -e default_http_port=9080 -e default_https_port=9443 ocn-book:coffee-shop
+----
+cd ../barista/
+mvn clean package
+docker build -t barista:1 .
+----
 
-==== Run zipkin
-docker run -d -p 9411:9411  --network=ocn-book-net --name=zipkin openzipkin/zipkin
+
+=== Running
+
+==== Docker network
+
+To ensure that the Docker containers can resolve each other by container name, we create a Docker network for them:
+
+----
+docker network create --subnet=192.168.42.0/24 dkrnet
+----
+
+==== Docker containers
+
+In order to run the applications in container, execute the following script:
+
+----
+./docker-run-local.sh
+----
+
+Alternatively, you can run the containers individually, in multiple terminal sessions:
+
+----
+docker run --rm \
+  --network=dkrnet \
+  --name=barista \
+  barista:1
+
+docker run --rm \
+  -p 9080:9080 \
+  -p 9443:9443 \
+  --network=dkrnet \
+  --name=coffee-shop \
+  coffee-shop:1
+----
+
+==== Run Zipkin
+
+----
+docker run -d \
+  -p 9411:9411 \
+  --network=dkrnet \
+  --name=zipkin \
+  openzipkin/zipkin
+----
